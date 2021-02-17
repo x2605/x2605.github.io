@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Factorio Locale String Editor</title>
+<title data-langKey="title">Factorio Locale String Editor</title>
 <link rel="stylesheet" type="text/css" href="locstredit.css">
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KYGSR6XRD0"></script>
@@ -21,37 +21,37 @@
   <div class="topbar">
     <a href="locstredit_help.html" target="_blank"><button class="barCon">?</button></a>
     <button class="barCon" onclick="document.getElementById('wswrap').checked=!document.getElementById('wswrap').checked;on_wswrap_changed()">
-      <input type="checkbox" id="wswrap" style="pointer-events:none;vertical-align:middle;"> <label for="wswrap" style="pointer-events:none;display:inline-block;vertical-align:middle;">word<br>wrap</label>
+      <input type="checkbox" id="wswrap" style="pointer-events:none;vertical-align:middle;"> <label for="wswrap" style="pointer-events:none;display:inline-block;vertical-align:middle;" data-langKey="69">word<br>wrap</label>
     </button>
-    1.<button class="barCon" onclick="gencompare('miss')">generate<br>missing</button>
-    <button class="barCon" onclick="gencompare('diff')">generate<br>difference</button>
-    <button class="barCon" onclick="gencompare('iden')">generate<br>identical</button>
-    2.<button class="barCon" onclick="tagnumber(true)">tag line<br>number</button>
-    <button class="barCon" onclick="tagnumber(false)">untag line<br>number</button>
-    3.<button class="barCon" onclick="detachkey()">detach<br>key names</button>
-    <button class="barCon" onclick="attachkey()">attach<br>key names</button>
-    4.<button class="barCon" onclick="mergecom2loc()">merge with<br>localised</button>
+    1.<button class="barCon" onclick="gencompare('miss')" data-langKey="70">generate<br>missing</button>
+    <button class="barCon" onclick="gencompare('diff')" data-langKey="71">generate<br>difference</button>
+    <button class="barCon" onclick="gencompare('iden')" data-langKey="72">generate<br>identical</button>
+    2.<button class="barCon" onclick="tagnumber(true)" data-langKey="73">tag line<br>number</button>
+    <button class="barCon" onclick="tagnumber(false)" data-langKey="74">untag line<br>number</button>
+    3.<button class="barCon" onclick="detachkey()" data-langKey="75">detach<br>key names</button>
+    <button class="barCon" onclick="attachkey()" data-langKey="76">attach<br>key names</button>
+    4.<button class="barCon" onclick="mergecom2loc()" data-langKey="77">merge with<br>localised</button>
   </div>
 </div>
 <div class="tabmenu">
   <ul>
     <li id="tab1" class="btnCon">
       <input type="radio" checked name="tabmenu" id="tabmenu1">
-      <label for="tabmenu1">original</label>
+      <label for="tabmenu1" data-langKey="100">original</label>
       <div class="tabCon">
         <textarea id="text_ori"></textarea>
       </div>
     </li>
     <li id="tab2" class="btnCon">
       <input type="radio" name="tabmenu" id="tabmenu2">
-      <label for="tabmenu2">localised</label>
+      <label for="tabmenu2" data-langKey="101">localised</label>
       <div class="tabCon">
         <textarea id="text_loc"></textarea>
       </div>
     </li>
     <li id="tab3" class="btnCon">
       <input type="radio" name="tabmenu" id="tabmenu3">
-      <label for="tabmenu3">compare</label>
+      <label for="tabmenu3" data-langKey="102">compare</label>
       <div class="tabCon">
         <textarea id="text_com"></textarea>
       </div>
