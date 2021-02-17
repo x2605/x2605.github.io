@@ -26,6 +26,9 @@ textarea{
   font-style:bold;
   font-weight:700;
 }
+button{
+  -webkit-appearance:none;
+}
 .tabmenu ul{
   list-style:none;
 }
