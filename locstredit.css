@@ -28,6 +28,7 @@ textarea{
 }
 button{
   -webkit-appearance:none;
+  appearance:none;
 }
 .tabmenu ul{
   list-style:none;
