@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help Factorio Locale String Editor</title>
+<link rel="stylesheet" type="text/css" href="locstredit.css">
+<!--Global site tag (gtag.js) Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KYGSR6XRD0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KYGSR6XRD0');
+</script> -->
+<script type="text/javascript" charset="UTF-8" src="locstredit.js"></script>
+</head>
+<body>
+<h2>Help - Factorio Locale String Editor</h2>
+<hr>
+<h3>◆ Work Progress</h3>
+<p>1. Copy texts from the full version of <b>.cfg</b> file under the <b>locale</b> folder of an Factorio mod extraction, and paste into <b>"original"</b> section of this app.</p>
+<p>2. (optional) Copy texts from the incomplete version of <b>.cfg</b> file of same mod or translating mod, and paste into <b>"localised"</b> section of this app.</p>
+<p>3. Press <b>"generate missing"</b> to filter keys not included in <b>"localised"</b> section. See <b>"compare"</b> section to see output.</p>
+<p>4. Translate texts in <b>"compare"</b> section in your way.</p>
+<p>5. (optional) To use translation software, press <b>"tag line number"</b> and then <b>"detach key names"</b> to exclude key names not to be translated. Press <b>"attach key names"</b> to go back to original format.</p>
+<p>6. Press <b>"merge with localised"</b> to merge <b>"compare"</b> text into <b>"localised"</b> text, your final result will be ready in <b>"compare"</b> section.</p>
+<p>* All progress need to be done while maintaining text in <b>"original"</b> section.</p>
+<p>* Saving and undo features are not supported. Frequently use 3rd party text editor to keep your texts.</p>
+<hr>
+<h3>◆ Menu Information</h3>
+<table class="noline">
+    <tr><td>-</td><td>?</td><td>:</td><td>This help page</td></tr>
+    <tr><td>-</td><td>word wrap</td><td>:</td><td>Turn on/off automatic line feed for long sentences.</td></tr>
+    <tr><td>-</td><td>generate missing</td><td>:</td><td>Generate <b>"compare"</b> text with keys not in <b>"localised"</b> but in <b>"original"</b>.</td></tr>
+    <tr><td>-</td><td>generate difference</td><td>:</td><td>Generate <b>"compare"</b> text with values in <b>"localised"</b> not same to <b>"original"</b>, including missing keys.</td></tr>
+    <tr><td>-</td><td>generate identical</td><td>:</td><td>Generate <b>"compare"</b> text with keys and values exactly same in both <b>"localised"</b> and <b>"original"</b>.</td></tr>
+    <tr><td>-</td><td>tag line numbers</td><td>:</td><td>Insert line number in front of each lines for all 3 sections.</td></tr>
+    <tr><td>-</td><td>untag line numbers</td><td>:</td><td>Revert <b>"tag line numbers"</b></td></tr>
+    <tr><td>-</td><td>detach key names</td><td>:</td><td>Remove key names and leave only values in text of <b>"compare"</b> section. <b>"tag line numbers"</b> is needed to remember original keys.</td></tr>
+    <tr><td>-</td><td>attach key names</td><td>:</td><td>Reattach key names to text processed by <b>"detach key names"</b>, refering data in <b>"original"</b> section.</td></tr>
+    <tr><td>-</td><td>merge with localised</td><td>:</td><td>Refering data in <b>"original"</b> section, merge <b>"localised"</b> with <b>"compare"</b> and put final result into <b>"compare"</b>.</td></tr>
+</table>
+</body>
+</html>
