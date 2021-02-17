@@ -102,7 +102,6 @@ function parse(str, obj_oriarr){try{
                 arr.push({num : n, group : last_grp});
             }
             else{
-                last_grp = '';
                 arr.push({num : n, empty : t});
             }
         }
