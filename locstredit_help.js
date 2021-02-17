@@ -1,7 +1,7 @@
 lang = {};
 lang['^ko'] = {
     title: '도움말 - 팩토리오 Locale 문자열 편집기',
-    1000: '도움말 - 팩토리오 Locale 문자열 편집기',
+    1000: '도움말 - <a href="locstredit.html">팩토리오 Locale 문자열 편집기</a>',
     1010: '◆ 작업 과정',
     1020: '1. 압축을 푼 팩토리오 모드의 <b>locale</b> 폴더 아래에 있는 풀버전인 <b>.cfg</b> 파일에서 텍스트를 복사하여 이 앱의 <b>"원본"</b> 영역에 붙여넣습니다.',
     1030: '2. (선택사항) 동일한 모드 또는 번역 모드의 불완전한 <b>.cfg</b> 파일에서 텍스트를 복사하여 이 앱의 <b>"현지화"</b> 영역에 붙여넣습니다.',
@@ -30,7 +30,9 @@ lang['^ko'] = {
     2090: '키 이름 붙이기',
     2095: '<b>"원본"</b> 영역의 데이터를 참조하여 <b>"키 이름 떼기"</b>로 처리된 텍스트에 키 이름을 다시 붙입니다.',
     2100: '현지화 병합',
-    2105: '<b>"원본"</b> 영역의 데이터를 참조하여 <b>"비교"</b>를 <b>"현지화"</b>에 병합하여 최종 결과를 <b>"비교"</b>에 보여줍니다.'
+    2105: '<b>"원본"</b> 영역의 데이터를 참조하여 <b>"비교"</b>를 <b>"현지화"</b>에 병합하여 최종 결과를 <b>"비교"</b>에 보여줍니다.',
+    3000: '◆ 변경점 기록',
+    4000: '◆ 외부 링크'
 };
 lang['^en'] = {
     title: 'Help - Factorio Locale String Editor',
@@ -63,7 +65,9 @@ lang['^en'] = {
     2090: 'attach key names',
     2095: 'Reattach key names to text processed by <b>"detach key names"</b>, refering data in <b>"original"</b> section.',
     2100: 'merge with localised',
-    2105: 'Refering data in <b>"original"</b> section, merge <b>"localised"</b> with <b>"compare"</b> and put final result into <b>"compare"</b>.'
+    2105: 'Refering data in <b>"original"</b> section, merge <b>"localised"</b> with <b>"compare"</b> and put final result into <b>"compare"</b>.',
+    3000: '◆ Changelog',
+    4000: '◆ External Links'
 };
 window.onload = function(){
     var reg;

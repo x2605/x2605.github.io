@@ -14,12 +14,16 @@
 
   gtag('config', 'G-KYGSR6XRD0');
 </script>
-<script type="text/javascript" charset="UTF-8" src="locstredit_help.js"></script>
+<script type="text/javascript" charset="UTF-8" src="locstredit_help.js?v=1"></script>
 </head>
 <body>
-<h2 data-langKey="1000">Help - Factorio Locale String Editor</h2>
+<h2 data-langKey="1000">Help - <a href="locstredit.html">Factorio Locale String Editor</a></h2>
+<p class="indexitem"><a href="#progress" data-langKey="1010">◆ Work Progress</a></p>
+<p class="indexitem"><a href="#menuinfo" data-langKey="2000">◆ Menu Information</a></p>
+<p class="indexitem"><a href="#changelog" data-langKey="3000">◆ Changelog</a></p>
+<p class="indexitem"><a href="#extlink" data-langKey="4000">◆ External Links</a></p>
 <hr>
-<h3 data-langKey="1010">◆ Work Progress</h3>
+<a id="progress"></a><h3 data-langKey="1010">◆ Work Progress</h3>
 <p data-langKey="1020">1. Copy texts from the full version of <b>.cfg</b> file under the <b>locale</b> folder of an Factorio mod extraction, and paste into <b>"original"</b> section of this app.</p>
 <p data-langKey="1030">2. (optional) Copy texts from the incomplete version of <b>.cfg</b> file of same mod or translating mod, and paste into <b>"localised"</b> section of this app.</p>
 <p data-langKey="1040">3. Press <b>"generate missing"</b> to filter keys not included in <b>"localised"</b> section. See <b>"compare"</b> section to see output.</p>
@@ -29,20 +33,28 @@
 <p data-langKey="1080">* All progress need to be done while maintaining text in <b>"original"</b> section.</p>
 <p data-langKey="1090">* Saving and undo features are not supported. Frequently use 3rd party text editor to keep your texts.</p>
 <hr>
-<h3 data-langKey="2000">◆ Menu Information</h3>
+<a id="menuinfo"></a><h3 data-langKey="2000">◆ Menu Information</h3>
 <table class="noline">
-    <tr><td>-</td><td>?</td><td>:</td><td data-langKey="2010">This help page</td></tr>
-    <tr><td>-</td><td data-langKey="2020">word wrap</td><td>:</td><td data-langKey="2025">Turn on/off automatic line feed for long sentences.</td></tr>
-    <tr><td>-</td><td data-langKey="2030">generate missing</td><td>:</td><td data-langKey="2035">Generate <b>"compare"</b> text with keys not in <b>"localised"</b> but in <b>"original"</b>.</td></tr>
-    <tr><td>-</td><td data-langKey="2040">generate difference</td><td>:</td><td data-langKey="2045">Generate <b>"compare"</b> text with values in <b>"localised"</b> not same to <b>"original"</b>, including missing keys.</td></tr>
-    <tr><td>-</td><td data-langKey="2050">generate identical</td><td>:</td><td data-langKey="2055">Generate <b>"compare"</b> text with keys and values exactly same in both <b>"localised"</b> and <b>"original"</b>.</td></tr>
-    <tr><td>-</td><td data-langKey="2060">tag line numbers</td><td>:</td><td data-langKey="2065">Insert line number in front of each lines for all 3 sections.</td></tr>
-    <tr><td>-</td><td data-langKey="2070">untag line numbers</td><td>:</td><td data-langKey="2075">Revert <b>"tag line numbers"</b>.</td></tr>
-    <tr><td>-</td><td data-langKey="2080">detach key names</td><td>:</td><td data-langKey="2085">Remove key names and leave only values in text of <b>"compare"</b> section. <b>"tag line numbers"</b> is needed to remember original keys.</td></tr>
-    <tr><td>-</td><td data-langKey="2090">attach key names</td><td>:</td><td data-langKey="2095">Reattach key names to text processed by <b>"detach key names"</b>, refering data in <b>"original"</b> section.</td></tr>
-    <tr><td>-</td><td data-langKey="2100">merge with localised</td><td>:</td><td data-langKey="2105">Refering data in <b>"original"</b> section, merge <b>"localised"</b> with <b>"compare"</b> and put final result into <b>"compare"</b>.</td></tr>
+  <tr><td>-</td><td style="min-width:5em;">?</td><td>:</td><td data-langKey="2010">This help page</td></tr>
+  <tr><td>-</td><td data-langKey="2020">word wrap</td><td>:</td><td data-langKey="2025">Turn on/off automatic line feed for long sentences.</td></tr>
+  <tr><td>-</td><td data-langKey="2030">generate missing</td><td>:</td><td data-langKey="2035">Generate <b>"compare"</b> text with keys not in <b>"localised"</b> but in <b>"original"</b>.</td></tr>
+  <tr><td>-</td><td data-langKey="2040">generate difference</td><td>:</td><td data-langKey="2045">Generate <b>"compare"</b> text with values in <b>"localised"</b> not same to <b>"original"</b>, including missing keys.</td></tr>
+  <tr><td>-</td><td data-langKey="2050">generate identical</td><td>:</td><td data-langKey="2055">Generate <b>"compare"</b> text with keys and values exactly same in both <b>"localised"</b> and <b>"original"</b>.</td></tr>
+  <tr><td>-</td><td data-langKey="2060">tag line numbers</td><td>:</td><td data-langKey="2065">Insert line number in front of each lines for all 3 sections.</td></tr>
+  <tr><td>-</td><td data-langKey="2070">untag line numbers</td><td>:</td><td data-langKey="2075">Revert <b>"tag line numbers"</b>.</td></tr>
+  <tr><td>-</td><td data-langKey="2080">detach key names</td><td>:</td><td data-langKey="2085">Remove key names and leave only values in text of <b>"compare"</b> section. <b>"tag line numbers"</b> is needed to remember original keys.</td></tr>
+  <tr><td>-</td><td data-langKey="2090">attach key names</td><td>:</td><td data-langKey="2095">Reattach key names to text processed by <b>"detach key names"</b>, refering data in <b>"original"</b> section.</td></tr>
+  <tr><td>-</td><td data-langKey="2100">merge with localised</td><td>:</td><td data-langKey="2105">Refering data in <b>"original"</b> section, merge <b>"localised"</b> with <b>"compare"</b> and put final result into <b>"compare"</b>.</td></tr>
 </table>
 <hr>
-<h3>◆ <a href="https://github.com/x2605/x2605.github.io">github</a></h3>
+<a id="changelog"></a><h3 data-langKey="3000">◆ Changelog</h3>
+<table class="noline">
+  <tr><td>-</td><td>v0.1</td><td>(2021-02-17)</td><td>Open to public & category parser hotfix</td><td></td></tr>
+</table>
+<hr>
+<a id="extlink"></a><h3 data-langKey="4000">◆ External Links</h3>
+<p>- <a href="https//github.com/x2605/x2605.github.io">github repository</a></p>
+
+<a id="gototop" href="#">▲</a>
 </body>
 </html>

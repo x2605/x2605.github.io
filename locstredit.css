@@ -2,10 +2,13 @@
 *{
   margin:0;
   padding:0;
-  font-size:14px;
+  font-size:inherit;
   line-height:1.3;
   font-family:'Noto Sans', 'Segoe UI', Tahoma, Verdana, sans-serif;
   box-sizing:border-box;
+}
+body{
+  font-size:14px;
 }
 p, h6, h5, h4, h3, h2, h1, hr{
   margin:15px 10px;
@@ -22,6 +25,7 @@ textarea{
   font-weight:400;
   font-feature-settings: "liga" 0, "calt" 0, "zero";
 }
+h2 a{color:inherit;}
 .topbar, .tabmenu, button{
   font-style:bold;
   font-weight:700;
@@ -33,6 +37,13 @@ button{
   background:#ddd;
   border:1px dashed #333;
   border-radius:5px;
+}
+.indexitem{
+  margin:10px 10px 10px 30px;
+  color:inherit;
+}
+.indexitem a:visited, .indexitem a:active, .indexitem a:link{
+  color:inherit;
 }
 .tabmenu ul{
   list-style:none;
@@ -125,4 +136,14 @@ button{
 }
 .noline td{
   padding:5px;
+}
+#gototop{
+  position:fixed;
+  z-index:1;
+  right:5px;
+  bottom:25%;
+  display:block;
+  color:rgba(.25,.25,.25,.25);
+  text-decoration:none;
+  font-size:18px;
 }
