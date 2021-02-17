@@ -76,9 +76,9 @@ function on_wswrap_changed(){try{
 
 function parse(str, obj_oriarr){try{
     var arr = new Array();
-    str = str.replaceAll(/​/g, '').replaceAll('\r\n', '\n');
+    str = str.replaceAll(/\u200B/g, '').replaceAll('\r\n', '\n');
     var spl = str.split('\n');
-    var reg0 = /^[◀◁]\s?(\d+)\s?[▶▷]\s?(.*)$/;
+    var reg0 = /^[\u25C0\u25C1]\s?(\d+)\s?[\u25B6\u25B7]\s?(.*)$/;
     var reg1 = /^\[([a-zA-Z0-9\-_]+)\]\s*$/;
     var reg2 = /^([a-zA-Z0-9\-_]+)=(.*)$/;
     var m = null;
@@ -128,13 +128,13 @@ function recompose(obj_arr, bool_tagnum){try{
     var str = '';
     for(var i = 0; i < obj_arr.length; i++){
         if(typeof(obj_arr[i].key) == 'string'){
-            str = str + ((bool_tagnum)? '◀'+obj_arr[i].num+'▶' : '') + obj_arr[i].key + '=' + obj_arr[i].text + '\n';
+            str = str + ((bool_tagnum)? '\u25C0'+obj_arr[i].num+'\u25B6' : '') + obj_arr[i].key + '=' + obj_arr[i].text + '\n';
         }
         else if(typeof(obj_arr[i].group) == 'string'){
-            str = str + ((bool_tagnum)? '◀'+obj_arr[i].num+'▶' : '') + '[' + obj_arr[i].group + ']\n';
+            str = str + ((bool_tagnum)? '\u25C0'+obj_arr[i].num+'\u25B6' : '') + '[' + obj_arr[i].group + ']\n';
         }
         else if(typeof(obj_arr[i].empty) == 'string'){
-            str = str + ((bool_tagnum)? '◁'+obj_arr[i].num+'▷' : '') + obj_arr[i].empty + '\n';
+            str = str + ((bool_tagnum)? '\u25C1'+obj_arr[i].num+'\u25B7' : '') + obj_arr[i].empty + '\n';
         }
     }
     if(str.length > 0){
@@ -227,16 +227,16 @@ function gencompare(work){try{
 
 function detachkey(){try{
     var dom_com = document.getElementById('text_com');
-    var str = dom_com.value.replaceAll(/​/g, '').replaceAll('\r\n', '\n');
+    var str = dom_com.value.replaceAll(/\u200B/g, '').replaceAll('\r\n', '\n');
     var spl = str.split('\n');
-    var reg = /^([◀◁])\s?(\d+)\s?([▶▷])\s?.*$/;
+    var reg = /^([\u25C0\u25C1])\s?(\d+)\s?([\u25B6\u25B7])\s?.*$/;
     var m = null;
     var met_normal = false;
     for(var i = 0; i < spl.length; i++){
         var t = spl[i];
         m = t.match(reg);
         if(m){
-            if(m[1] == '◀' && parseInt(m[2]) > 0 && m[3] == '▶'){
+            if(m[1] == '\u25C0' && parseInt(m[2]) > 0 && m[3] == '\u25B6'){
                 met_normal = true;
             }
         }
@@ -255,13 +255,13 @@ function detachkey(){try{
         var newstr = '';
         for(var i = 0; i < arr.length; i++){
             if(typeof(arr[i].key) == 'string'){
-                newstr = newstr + '●'+arr[i].num+'●' + arr[i].text + '\n';
+                newstr = newstr + '\u25CF'+arr[i].num+'\u25CF' + arr[i].text + '\n';
             }
             else if(typeof(arr[i].group) == 'string'){
-                newstr = newstr + '○'+arr[i].num+'○' + arr[i].group + '\n';
+                newstr = newstr + '\u25CB'+arr[i].num+'\u25CB' + arr[i].group + '\n';
             }
             else if(typeof(arr[i].empty) == 'string'){
-                newstr = newstr + '◇0◇' + arr[i].empty + '\n';
+                newstr = newstr + '\u25C70\u25C7' + arr[i].empty + '\n';
             }
         }
         if(newstr.length > 0){
@@ -273,8 +273,8 @@ function detachkey(){try{
 
 function attachkey(){try{
     var dom_com = document.getElementById('text_com');
-    var spl = dom_com.value.replaceAll(/​/g, '').replaceAll('\r\n', '\n').split('\n');
-    var reg = /^[●○◇]\s?(\d+)\s?[●○◇]\s?(.*)$/;
+    var spl = dom_com.value.replaceAll(/\u200B/g, '').replaceAll('\r\n', '\n').split('\n');
+    var reg = /^[\u25CF\u25CB\u25C7]\s?(\d+)\s?[\u25CF\u25CB\u25C7]\s?(.*)$/;
     var m = null;
     var str = '';
     var ori = parse(document.getElementById('text_ori').value);
@@ -289,16 +289,16 @@ function attachkey(){try{
             for(var j = 0; j < ori.length; j++){
                 if(ori[j].num == m[1]){
                     if(typeof(ori[j].key) == 'string'){
-                        str = str + '◀' + ori[j].num + '▶' + ori[j].key + '=' + m[2] + '\n';
+                        str = str + '\u25C0' + ori[j].num + '\u25B6' + ori[j].key + '=' + m[2] + '\n';
                     }
                     else if(typeof(ori[j].group) == 'string'){
-                        str = str + '◀' + ori[j].num + '▶[' + ori[j].group + ']\n';
+                        str = str + '\u25C0' + ori[j].num + '\u25B6[' + ori[j].group + ']\n';
                     }
                 }
             }
         }
         else{
-            str = str + '◁' + (i+1) + '▷' + m[2] + '\n';
+            str = str + '\u25C1' + (i+1) + '\u25B7' + m[2] + '\n';
         }
     }
     if(str.length > 0){
