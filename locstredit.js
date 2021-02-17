@@ -76,7 +76,7 @@ function on_wswrap_changed(){try{
 
 function parse(str, obj_oriarr){try{
     var arr = new Array();
-    str = str.replaceAll(/\u200B/g, '').replaceAll('\r\n', '\n');
+    str = str.replace(/\u200B/g, '').replace(/\r\n/g, '\n');
     var spl = str.split('\n');
     var reg0 = /^[\u25C0\u25C1]\s?(\d+)\s?[\u25B6\u25B7]\s?(.*)$/;
     var reg1 = /^\[([a-zA-Z0-9\-_]+)\]\s*$/;
@@ -227,7 +227,7 @@ function gencompare(work){try{
 
 function detachkey(){try{
     var dom_com = document.getElementById('text_com');
-    var str = dom_com.value.replaceAll(/\u200B/g, '').replaceAll('\r\n', '\n');
+    var str = dom_com.value.replace(/\u200B/g, '').replace(/\r\n/g, '\n');
     var spl = str.split('\n');
     var reg = /^([\u25C0\u25C1])\s?(\d+)\s?([\u25B6\u25B7])\s?.*$/;
     var m = null;
@@ -273,7 +273,7 @@ function detachkey(){try{
 
 function attachkey(){try{
     var dom_com = document.getElementById('text_com');
-    var spl = dom_com.value.replaceAll(/\u200B/g, '').replaceAll('\r\n', '\n').split('\n');
+    var spl = dom_com.value.replace(/\u200B/g, '').replace(/\r\n/g, '\n').split('\n');
     var reg = /^[\u25CF\u25CB\u25C7]\s?(\d+)\s?[\u25CF\u25CB\u25C7]\s?(.*)$/;
     var m = null;
     var str = '';
