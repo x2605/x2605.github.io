@@ -27,8 +27,12 @@ textarea{
   font-weight:700;
 }
 button{
+  -moz-appearance:none;
   -webkit-appearance:none;
   appearance:none;
+  background:#ddd;
+  border:1px dashed #333;
+  border-radius:5px;
 }
 .tabmenu ul{
   list-style:none;
