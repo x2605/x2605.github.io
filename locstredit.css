@@ -4,11 +4,13 @@
   padding:0;
   font-size:inherit;
   line-height:1.3;
-  font-family:'Noto Sans', 'Segoe UI', Tahoma, Verdana, sans-serif;
+  font-family:'Noto Sans', 'Noto Sans CJK kr', 'Noto Sans CJK tc', 'Noto Sans CJK jp', 'Noto Sans CJK sc', 본고딕, 나눔바른고딕, 나눔고딕, NanumGothic, 맑은고딕, 'Malgun Gothic', 'Segoe UI', Arial, Tahoma, Verdana, sans-serif;
   box-sizing:border-box;
 }
-body{
+html, body{
   font-size:14px;
+  height:100%;
+  width:100%;
 }
 p, h6, h5, h4, h3, h2, h1, hr{
   margin:15px 10px;
@@ -35,58 +37,87 @@ button{
   -webkit-appearance:none;
   appearance:none;
   background:#ddd;
-  border:1px dashed #333;
+  border-width:1px;
+  border-style:dashed;
   border-radius:5px;
+}
+.valign, .valign td{
+  vertical-align:top;
+}
+.nw{
+  white-space:nowrap;
+  word-break:keep-all;
+}
+.versign{
+  position:absolute;
+  z-index:1;
+  /*text-shadow:.5px 1px 0 #fff, -.5px 1px 0 #fff;*/
+  padding-left:3px;
+  padding-top:1px;
+  font-weight:bold;
 }
 .indexitem{
   margin:10px 10px 10px 30px;
   color:inherit;
 }
-.indexitem a:visited, .indexitem a:active, .indexitem a:link{
+.indexitem a{
   color:inherit;
+}
+.barTabWrap{
+  display:flex;
+  flex-flow:column;
+  height:100%;
+}
+.topbar{
+  box-sizing:content-box;
+  line-height:55px;
+}
+.vbar{
+  width:3px;
+  height:50px;
+  display:inline-block;
+  vertical-align:bottom;
 }
 .tabmenu ul{
   list-style:none;
 }
+.barCon{
+  vertical-align:bottom;
+  height:50px;
+  padding:0 4px;
+  margin:0 2px;
+}
+.barCon, .barCon *{
+  font-size:12px;
+}
 .topbarWrap{
   padding:10px 7px;
-  height:60px;
   box-sizing:content-box;
   overflow:hidden;
 }
-.topbar{
-  overflow-x:scroll;
-  overflow-y:hidden;
-  height:90px;
-  box-sizing:content-box;
-  white-space:nowrap;
-}
-.barCon{
-  vertical-align:bottom;
-  height:60px;
-  padding:0 5px;
-  margin:0 3px;
-  position:relative;
-}
-.barCon, .barCon *{
-  font-size:15px;
+.tabWrap{
+  flex-grow:1;
 }
 .tabmenu{
-  max-width:100%;
+  width:100%;
+  height:100%;
+}
+.tabmenu ul{
+  height:100%;
   position:relative;
 }
 .tabmenu ul li{
   display:block;
-  width:33.3%;
-  float:left; 
+  float:left;
+  width:33.33%;
   text-align:center;
   line-height:40px;
+  height:100%;
 }
 .tabmenu label{
   display:block;
   width:100%;
   height:40px;
-  background:#f9f9f9;
   line-height:40px;
 }
 .tabmenu input{
@@ -95,33 +126,34 @@ button{
 .tabCon{
   text-align:left;
   padding:5px;
-  height:calc(100vh - 120px);
-  border:5px solid #f9f9f9;
-}
-@media (max-width: 800px){
-.tabCon{
   position:absolute;
   top:40px;
-  left:0;
-  display:none;
-  width:100%;
+  height:calc(100% - 40px);
+  border-width:5px;
+  border-style:solid;
+  border-color:#eee;
 }
-.tabmenu input:checked ~ label{
-  background:#ccc;
+@media (max-width: 800px){
+  .tabCon{
+    display:none;
+    width:100%;
+    left:0;
+  }
+  .tabmenu input:checked ~ label{
+    font-size:inherit;
+  }
+  .tabmenu input:checked ~ .tabCon{
+    display:block;
+  }
 }
-.tabmenu input:checked ~ .tabCon{
-  display:block;
-}
-} /* @media end */
 @media (min-width: 801px){
-.tabCon{
-  width:100%;
+  .tabCon{
+    width:33.33%;
+  }
+  .tabmenu label{
+    pointer-events:none;
+  }
 }
-.tabmenu label{
-  pointer-events:none;
-  background:#ccc;
-}
-} /* @media end */
 .tabCon textarea{
   box-sizing:border-box;
   width:100%;
@@ -146,4 +178,94 @@ button{
   color:rgba(.25,.25,.25,.25);
   text-decoration:none;
   font-size:18px;
+}
+
+/*theme*/
+body{
+  background:#fff;
+  color:#000;
+}
+a{
+  color:#06f;
+}
+button{
+  background:#ddd;
+  border-color:#333;
+}
+textarea, input{
+  background:#fff;
+  color:#000;
+}
+.versign{
+  color:black;
+  text-shadow:.5px 1px 0 #fff, -.5px 1px 0 #fff;
+}
+.vbar{
+  background:#ddd;
+}
+.tabmenu label{
+  background:#eee;
+}
+.tabCon{
+  border-color:#eee;
+}
+@media (max-width: 800px){
+  .tabmenu input:checked ~ label{
+    background:#bbb;
+  }
+}
+@media (min-width: 801px){
+  .tabmenu label{
+    background:#bbb;
+  }
+}
+#gototop{
+  color:rgba(0,0,0,.35);
+}
+@media (prefers-color-scheme: dark) {
+  body{
+    background:#222;
+    color:#eee;
+  }
+  a{
+    color:#f90;
+  }
+  button{
+    background:#444;
+    color:#eee;
+    border-color:#aaa;
+  }
+  textarea, input{
+    background:#222;
+    color:#eee;
+  }
+  .versign{
+    color:white;
+    text-shadow:.5px 1px 0 #000, -.5px 1px 0 #000;
+  }
+  .vbar{
+    background:#666;
+  }
+  .tabmenu label{
+    background:#111;
+    color:#aaa;
+  }
+  .tabCon{
+    border-color:#111;
+  }
+  @media (max-width: 800px){
+    .tabmenu input:checked ~ label{
+      background:#555;
+      color:#fff;
+    }
+  }
+  @media (min-width: 801px){
+    .tabmenu label{
+      background:#555;
+      color:#fff;
+    }
+  }
+  #gototop{
+    color:rgba(255,255,255,.35);
+  }
 }

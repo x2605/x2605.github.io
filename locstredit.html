@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-langKey="title">Factorio Locale String Editor</title>
-<link rel="stylesheet" type="text/css" href="locstredit.css?v=1">
+<link rel="stylesheet" type="text/css" href="locstredit.css?v=0.2">
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KYGSR6XRD0"></script>
 <script>
@@ -14,51 +14,58 @@
 
   gtag('config', 'G-KYGSR6XRD0');
 </script>
-<script type="text/javascript" charset="UTF-8" src="locstredit.js?v=1"></script>
+<script type="text/javascript" charset="UTF-8" src="locstredit.js?v=0.2"></script>
 </head>
 <body>
-<div style="position:absolute;z-index:1;text-shadow:.5px 1px 0 #fff, -.5px 1px 0 #fff;padding-left:3px;padding-top:1px;font-weight:bold;">
-v0.1</div>
-<div class="topbarWrap">
-  <div class="topbar">
-    <a href="locstredit_help.html" target="_blank"><button class="barCon">?</button></a>
-    <button class="barCon" onclick="document.getElementById('wswrap').checked=!document.getElementById('wswrap').checked;on_wswrap_changed()">
-      <input type="checkbox" id="wswrap" style="pointer-events:none;vertical-align:middle;"> <label for="wswrap" style="pointer-events:none;display:inline-block;vertical-align:middle;" data-langKey="69">word<br>wrap</label>
-    </button>
-    1.<button class="barCon" onclick="gencompare('miss')" data-langKey="70">generate<br>missing</button>
-    <button class="barCon" onclick="gencompare('diff')" data-langKey="71">generate<br>difference</button>
-    <button class="barCon" onclick="gencompare('iden')" data-langKey="72">generate<br>identical</button>
-    2.<button class="barCon" onclick="tagnumber(true)" data-langKey="73">tag line<br>number</button>
-    <button class="barCon" onclick="tagnumber(false)" data-langKey="74">untag line<br>number</button>
-    3.<button class="barCon" onclick="detachkey()" data-langKey="75">detach<br>key names</button>
-    <button class="barCon" onclick="attachkey()" data-langKey="76">attach<br>key names</button>
-    4.<button class="barCon" onclick="mergecom2loc()" data-langKey="77">merge with<br>localised</button>
+<div class="versign">v0.2</div>
+<div class="barTabWrap">
+  <div class="topbarWrap">
+    <div class="topbar">
+      <a href="locstredit_help.html" target="_blank"><button class="barCon">?</button></a>
+      <button class="barCon" onclick="document.getElementById('wswrap').checked=!document.getElementById('wswrap').checked;on_wswrap_changed()">
+        <input type="checkbox" id="wswrap" style="pointer-events:none;vertical-align:middle;"> <label for="wswrap" style="pointer-events:none;display:inline-block;vertical-align:middle;" data-langKey="69">word<br>wrap</label>
+      </button>
+      <div class="vbar"></div>
+      <button class="barCon" onclick="gencompare('miss')" data-langKey="70">generate<br>missing</button>
+      <button class="barCon" onclick="gencompare('diff')" data-langKey="71">generate<br>difference</button>
+      <button class="barCon" onclick="gencompare('iden')" data-langKey="72">generate<br>identical</button>
+      <div class="vbar"></div>
+      <button class="barCon" onclick="tagnumber(true)" data-langKey="73">tag line<br>number</button>
+      <button class="barCon" onclick="tagnumber(false)" data-langKey="74">untag line<br>number</button>
+      <div class="vbar"></div>
+      <button class="barCon" onclick="detachkey()" data-langKey="75">detach<br>key names</button>
+      <button class="barCon" onclick="attachkey()" data-langKey="76">attach<br>key names</button>
+      <div class="vbar"></div>
+      <button class="barCon" onclick="mergecom2loc()" data-langKey="77">merge with<br>localised</button>
+    </div>
   </div>
-</div>
-<div class="tabmenu">
-  <ul>
-    <li id="tab1" class="btnCon">
-      <input type="radio" checked name="tabmenu" id="tabmenu1">
-      <label for="tabmenu1" data-langKey="100">original</label>
-      <div class="tabCon">
-        <textarea id="text_ori"></textarea>
-      </div>
-    </li>
-    <li id="tab2" class="btnCon">
-      <input type="radio" name="tabmenu" id="tabmenu2">
-      <label for="tabmenu2" data-langKey="101">localised</label>
-      <div class="tabCon">
-        <textarea id="text_loc"></textarea>
-      </div>
-    </li>
-    <li id="tab3" class="btnCon">
-      <input type="radio" name="tabmenu" id="tabmenu3">
-      <label for="tabmenu3" data-langKey="102">compare</label>
-      <div class="tabCon">
-        <textarea id="text_com"></textarea>
-      </div>
-    </li>
-  </ul>
+  <div class="tabWrap">
+    <div class="tabmenu">
+      <ul>
+        <li id="tab1" class="btnCon">
+          <input type="radio" checked name="tabmenu" id="tabmenu1">
+          <label for="tabmenu1" data-langKey="100">original</label>
+          <div class="tabCon">
+            <textarea id="text_ori"></textarea>
+          </div>
+        </li>
+        <li id="tab2" class="btnCon">
+          <input type="radio" name="tabmenu" id="tabmenu2">
+          <label for="tabmenu2" data-langKey="101">localised</label>
+          <div class="tabCon">
+            <textarea id="text_loc"></textarea>
+          </div>
+        </li>
+        <li id="tab3" class="btnCon">
+          <input type="radio" name="tabmenu" id="tabmenu3">
+          <label for="tabmenu3" data-langKey="102">compare</label>
+          <div class="tabCon">
+            <textarea id="text_com"></textarea>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 </body>
 </html>

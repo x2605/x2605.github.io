@@ -16,7 +16,9 @@ lang['^ko'] = {
     900: 'msg: 900\n* 키 이름 떼기 * 실패.\n"비교" 영역에 줄 번호가 붙어있지 않은 것 같습니다. "줄 번호 표기"를 먼저 실행하십시오.\n\n문제 부분:\n\n',
     910: 'msg: 910\n* 키 이름 떼기 * 실패.\n"비교" 영역에 파싱할 것이 아무것도 없습니다.',
     920: 'msg: 920\n* 키 이름 붙이기 * 실패.\n"비교" 영역의 무언가가 잘못되었습니다. "키 이름 떼기"를 먼저 성공한 것이 맞습니까? 그렇다면 각 줄의 접두문자열을 유지해야 합니다. 의도하지 않은 문자가 있는지 확인하십시오.\n\n문제 부분:\n\n',
-    930: 'msg: 930\n"비교" 영역의 텍스트가 변경되며 되돌릴 수 없습니다. 계속하시겠습니까?'
+    930: 'msg: 930\n"비교" 영역의 텍스트가 변경되며 되돌릴 수 없습니다. 계속하시겠습니까?',
+    940: 'msg: 940\n"비교" 영역이 비어있지 않습니다. 내용을 삭제하시겠습니까?',
+    950: 'msg: 950\n"원본"과 "현지화"의 내용이 상충할 수 있습니다. "현지화"의 내용을 유지하겠습니까?'
 };
 lang['^en'] = {
     title: 'Factorio Locale String Editor',
@@ -35,7 +37,9 @@ lang['^en'] = {
     900: 'msg: 900\n* detach key names * FAILED.\nLine number seems not tagged at texts in "compare" section. Do "tag line number" first.\n\nProblem in:\n\n',
     910: 'msg: 910\n* detach key names * FAILED.\nThere is nothing to be parsed in "compare" section.',
     920: 'msg: 920\n* attach key names * FAILED.\nSomething wrong in "compare" section. Did you really do "detach key names" first successful? If so, preserve all prefixes of each line. Check for unintended characters.\n\nProblem in:\n\n',
-    930: 'msg: 930\nTexts in "compare" section will be changed irreversible. Are you sure to continue?'
+    930: 'msg: 930\nTexts in "compare" section will be changed irreversible. Are you sure to continue?',
+    940: 'msg: 940\n"compare" section is not empty. Do you really discard its contents?',
+    950: 'msg: 950\nContents in "original" and "localised" can conflict. Do you want to keep content of "localised"?'
 };
 dialmsg = Object.assign({}, lang['^en']);
 window.onload = function(){
@@ -147,7 +151,7 @@ function recompose(obj_arr, bool_tagnum){try{
 function askcomp(){try{
     var com = document.getElementById('text_com');
     if(com.value != ''){
-        var conf = window.confirm('"compare" section is not empty. Do you really discard its contents?');
+        var conf = window.confirm(dialmsg[940]);
         if(!conf){
             return false;
         }
@@ -179,6 +183,10 @@ function gencompare(work){try{
     else if(work == 'iden'){work = 3}
     else{work = 0}
     if(askcomp()){
+        var keeploc = true;
+        if(work == 2){
+            keeploc = window.confirm(dialmsg[950]);
+        }
         var ori = parse(document.getElementById('text_ori').value);
         var loc = parse(document.getElementById('text_loc').value, ori);
         var last_grp = '';
@@ -206,7 +214,13 @@ function gencompare(work){try{
                             last_grp = ori[i].group;
                             newstr = newstr + '\n[' + last_grp + ']\n';
                         }
-                        newstr = newstr + ori[i].key + '=' + loc[j].text + '\n';
+                        if(keeploc){
+                            newstr = newstr + ori[i].key + '=' + loc[j].text + '\n';
+                        }
+                        else{
+                            newstr = newstr + ori[i].key + '=' + ori[j].text + '\n';
+                        }
+                        
                     }
                     break;
                 }
@@ -224,9 +238,134 @@ function gencompare(work){try{
     }
 }catch(e){ew(e)}}
 
+function matchSplitMix(str, reg){
+    var m = str.match(reg)
+    var valueBlockRaw = [];
+    var tmp = str;
+    var pos = 0;
+    if(m){
+        for(var i = 0; i < m.length; i++){
+            pos = tmp.indexOf(m[i]);
+            if(pos == 0){
+                valueBlockRaw.push({m: true, t: m[i]});
+                tmp = tmp.slice(m[i].length);
+            }
+            else if(pos > 0){
+                valueBlockRaw.push({m: false, t: tmp.slice(0, pos)});
+                tmp = tmp.slice(pos);
+                valueBlockRaw.push({m: true, t: m[i]});
+                tmp = tmp.slice(m[i].length);
+            }
+        }
+        valueBlockRaw.push({m: false, t: tmp});
+    }
+    else{
+        return [{m: false, t: str}];
+    }
+    return valueBlockRaw;
+}
+
+function valueParser(str){
+    var valueBlock = [];
+    const regs = [
+        /__plural_for_parameter_\d+_\{.+?\}__/g, //plural
+        /__([A-Z0-9]|_(?!_))+__\d+__([A-Za-z0-9\-]|_(?!_))+__/g, //prefixed1
+        /__([A-Z0-9]|_(?!_))+__([A-Za-z0-9\-]|_(?!_))+__/g, //prefixed2
+        /__\d+__/g, //number
+        /\[[a-z\-]+=[^\]]+\]/g, //rich
+        /\[\/[a-z]+\]/g, //rich bracket close
+        /\\[abfnrtv\\"'\[\]]/g //lua escaping chars
+    ]
+    const lim = regs.length - 1;
+    const recurBlockBuilder = function(str2, dim){
+        let tmp = matchSplitMix(str2, regs[dim]);
+        for(let i = 0; i < tmp.length; i++){
+            if(tmp[i].m){
+                valueBlock.push(tmp[i]);
+            }
+            else if(dim < lim){
+                recurBlockBuilder(tmp[i].t, dim + 1);
+            }
+            else if(dim >= lim){
+                valueBlock.push(tmp[i]);
+            }
+        }
+    }
+    recurBlockBuilder(str, 0);
+    return valueBlock;
+}
+
+const emojiList = [
+    '\u{1F42E}', '\u{1F42F}', '\u{1F431}', '\u{1F434}', '\u{1F435}', '\u{1F436}', '\u{1F437}',
+    '\u{1F43A}', '\u{1F43D}', '\u{1F981}', '\u{1F984}', '\u{1F98A}', '\u{1F98C}', '\u{1F98D}',
+    '\u{1F992}', '\u{1F993}', '\u{1F999}', '\u{1F99D}', '\u{1F9A7}', '\u{1F9AC}', '\u{1F9AE}',
+    '\u{1F402}', '\u{1F403}', '\u{1F404}', '\u{1F405}', '\u{1F406}', '\u{1F408}', '\u{1F40E}',
+    '\u{1F40F}', '\u{1F410}', '\u{1F411}', '\u{1F412}', '\u{1F415}', '\u{1F416}', '\u{1F417}',
+    '\u{1F429}', '\u{1F42A}'
+];
+const emojiListLen = emojiList.length;
+function getEmojiMap(valueBlockOfOriginal){
+    var emojiMap = [];
+    for(var i = 0; i < valueBlockOfOriginal.length; i++){
+        if(valueBlockOfOriginal[i].m){
+            var found = false;
+            for(var j = 0; j < emojiMap.length; j++){
+                if(emojiMap[j] == valueBlockOfOriginal[i].t){
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                emojiMap.push(valueBlockOfOriginal[i].t);
+            }
+        }
+    }
+    return emojiMap;
+}
+function toEmoji(valueBlockOfCompare, emojiMap){
+    var str = '';
+    for(var i = 0; i < valueBlockOfCompare.length; i++){
+        if(valueBlockOfCompare[i].m){
+            var found = false;
+            for(var j = 0; j < emojiMap.length; j++){
+                if(emojiMap[j] == valueBlockOfCompare[i].t){
+                    found = true;
+                    if(j < emojiListLen){
+                        str = str + emojiList[j];
+                    }
+                    else{
+                        str = str + valueBlockOfCompare[i].t;
+                    }
+                    break;
+                }
+            }
+            if(!found){
+                str = str + valueBlockOfCompare[i].t;
+            }
+        }
+        else{
+            str = str + valueBlockOfCompare[i].t;
+        }
+    }
+    return str;
+}
+function fromEmoji(str, emojiMap){
+    var reg;
+    var len = emojiMap.length;
+    var newstr = str;
+    if(len > emojiListLen){
+        len = emojiListLen;
+    }
+    for(var i = 0; i < len; i++){
+        reg = new RegExp(emojiList[i], 'g');
+        newstr = newstr.replace(reg, emojiMap[i]);
+    }
+    return newstr;
+}
+
 function detachkey(){try{
     var dom_com = document.getElementById('text_com');
-    var str = dom_com.value.replace(/\u200B/g, '').replace(/\r\n/g, '\n');
+    var str = dom_com.value.replace(/\u200B/g, '').replace(/\r\n/g, '\n').replace(/(\n)+/g, '\n');
     var spl = str.split('\n');
     var reg = /^([\u25C0\u25C1])\s?(\d+)\s?([\u25B6\u25B7])\s?.*$/;
     var m = null;
@@ -252,15 +391,19 @@ function detachkey(){try{
         var ori = parse(document.getElementById('text_ori').value);
         var arr = parse(str, ori);
         var newstr = '';
+        var oriBlk, emojiMap, comBlk;
         for(var i = 0; i < arr.length; i++){
             if(typeof(arr[i].key) == 'string'){
-                newstr = newstr + '\u25CF'+arr[i].num+'\u25CF' + arr[i].text + '\n';
+                oriBlk = valueParser(ori[parseInt(arr[i].num) - 1].text);
+                emojiMap = getEmojiMap(oriBlk);
+                comBlk = valueParser(arr[i].text);
+                newstr = newstr + '- \u25CF - '+arr[i].num+' - \u25CF - ' + toEmoji(comBlk, emojiMap) + '\n';
             }
             else if(typeof(arr[i].group) == 'string'){
-                newstr = newstr + '\u25CB'+arr[i].num+'\u25CB' + arr[i].group + '\n';
+                newstr = newstr + '- \u25CB - '+arr[i].num+' - \u25CB - ' + arr[i].group + '\n';
             }
             else if(typeof(arr[i].empty) == 'string'){
-                newstr = newstr + '\u25C70\u25C7' + arr[i].empty + '\n';
+                newstr = newstr + '- \u25C7 - 0 - \u25C7 - ' + arr[i].empty + '\n';
             }
         }
         if(newstr.length > 0){
@@ -272,8 +415,8 @@ function detachkey(){try{
 
 function attachkey(){try{
     var dom_com = document.getElementById('text_com');
-    var spl = dom_com.value.replace(/\u200B/g, '').replace(/\r\n/g, '\n').split('\n');
-    var reg = /^[\u25CF\u25CB\u25C7]\s?(\d+)\s?[\u25CF\u25CB\u25C7]\s?(.*)$/;
+    var spl = dom_com.value.replace(/\u200B/g, '').replace(/\r\n/g, '\n').replace(/(\n)+/g, '\n').split('\n');
+    var reg = /^-\s?[\u25CF\u25CB\u25C7]\s?-\s?(\d+)\s?-\s?[\u25CF\u25CB\u25C7]\s?-\s*(.*)$/;
     var m = null;
     var str = '';
     var ori = parse(document.getElementById('text_ori').value);
@@ -288,7 +431,9 @@ function attachkey(){try{
             for(var j = 0; j < ori.length; j++){
                 if(ori[j].num == m[1]){
                     if(typeof(ori[j].key) == 'string'){
-                        str = str + '\u25C0' + ori[j].num + '\u25B6' + ori[j].key + '=' + m[2] + '\n';
+                        oriBlk = valueParser(ori[j].text);
+                        emojiMap = getEmojiMap(oriBlk);
+                        str = str + '\u25C0' + ori[j].num + '\u25B6' + ori[j].key + '=' + fromEmoji(m[2], emojiMap) + '\n';
                     }
                     else if(typeof(ori[j].group) == 'string'){
                         str = str + '\u25C0' + ori[j].num + '\u25B6[' + ori[j].group + ']\n';
