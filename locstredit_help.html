@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-langKey="title">Help Factorio Locale String Editor</title>
-<link rel="stylesheet" type="text/css" href="locstredit.css?v=0.2">
+<link rel="stylesheet" type="text/css" href="locstredit.css?v=0.2.1">
 <!--Global site tag (gtag.js) Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KYGSR6XRD0"></script>
 <script>
@@ -13,8 +13,8 @@
   gtag('js', new Date());
 
   gtag('config', 'G-KYGSR6XRD0');
-</script>
-<script type="text/javascript" charset="UTF-8" src="locstredit_help.js?v=0.2"></script>
+</script
+<script type="text/javascript" charset="UTF-8" src="locstredit_help.js?v=0.2.1"></script>
 </head>
 <body>
 <h2 data-langKey="1000">Help - <a href="locstredit.html">Factorio Locale String Editor</a></h2>
@@ -49,6 +49,12 @@
 <hr>
 <a id="changelog"></a><h3 data-langKey="3000">◆ Changelog</h3>
 <table class="noline valign">
+  <tr><td>-</td><td>v0.2.1</td><td class="nw">2021-02-20</td><td>
+    <p>- "detach key names" & "attach key names" now handle "\n" character with exclusive emoji and give ability to convert/revert with line breaks.</p>
+    <p>- Parser now remembers how many empty lines before each line in "original" section, and mimic even empty lines of "original" when generating "compare" texts.
+      <br>Now full key copy of "original" text in "compare" can have exactly same line count and sorting order, even when "original" have random empty lines here and there.
+    </p>
+  </td><td></td></tr>
   <tr><td>-</td><td>v0.2</td><td class="nw">2021-02-18</td><td>
     <p>- Possible to choose priority among "original" and "localised" when using "generate difference".</p>
     <p>- Light/dark mode automatically switches by device's light/dark setting. (If browser & OS supports)</p>
