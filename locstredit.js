@@ -20,7 +20,8 @@ lang['^ko'] = {
     940: 'msg: 940\n"비교" 영역이 비어있지 않습니다. 내용을 삭제하시겠습니까?',
     950: 'msg: 950\n"원본"과 "현지화"의 내용이 상충할 수 있습니다. "현지화"의 내용을 유지하겠습니까?',
     960: 'msg: 960\n회피하는 이모지가 처리되지 않았습니다. 잘못된 문장 편집이 있거나, "비교"가 "원본" 데이터의 매핑을 엄격하게 따르지 않아서 그런 것일 수 있습니다.\n\n문제 부분:\n\n',
-    970: '\n\n또는 그 이전 라인.'
+    970: '\n\n또는 그 이전 라인.',
+    980: 'msg: 980\n"비교"에 병합할 것이 아무것도 없습니다. 병합이 중단되었습니다.'
 };
 lang['^en'] = {
     title: 'Factorio Locale String Editor',
@@ -43,7 +44,8 @@ lang['^en'] = {
     940: 'msg: 940\n"compare" section is not empty. Do you really discard its contents?',
     950: 'msg: 950\nContents in "original" and "localised" can conflict. Do you want to keep content of "localised"?',
     960: 'msg: 960\nAvoiding emoji is not processed. There is possiblity that wrong sentence modification is applied or "compare" is not strictly following mapping of "original" data.\n\nProblem in:\n\n',
-    970: '\n\nOr its previous line.'
+    970: '\n\nOr its previous line.',
+    980: 'msg: 980\nNothing to merge in "compare". Merging is aborted.'
 };
 dialmsg = Object.assign({}, lang['^en']);
 window.onload = function(){
@@ -515,6 +517,7 @@ function mergecom2loc(){try{
         var last_grp = '';
         var obj;
         var empty_before = '';
+        var com_cnt = 0;
         for(var i = 0; i < ori.length; i++){
             obj = null;
             if(typeof(ori[i].empty) == 'string' || typeof(ori[i].key) != 'string'){
@@ -543,6 +546,7 @@ function mergecom2loc(){try{
                     && com[j].group == ori[i].group
                 ){
                     obj = Object.assign({}, com[j]);
+                    com_cnt++;
                     break;
                 }
             }
@@ -555,6 +559,10 @@ function mergecom2loc(){try{
                 empty_before = Array(obj.ebef).fill('\n').join('');
                 newstr = newstr + empty_before + obj.key + '=' + obj.text + '\n';
             }
+        }
+        if(com_cnt == 0){
+            window.alert(dialmsg[980]);
+            return;
         }
         document.getElementById('text_com').value = newstr;
     }
