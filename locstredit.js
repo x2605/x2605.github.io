@@ -253,9 +253,6 @@ function gencompare(work){try{
                 newstr = newstr + empty_before + ori[i].key + '=' + ori[i].text + '\n';
             }
         }
-        if(newstr.length > 0){
-            newstr = newstr.slice(0, -1);
-        }
         document.getElementById('text_com').value = recompose(parse(newstr), false);
     }
 }catch(e){ew(e)}}
@@ -558,9 +555,6 @@ function mergecom2loc(){try{
                 empty_before = Array(obj.ebef).fill('\n').join('');
                 newstr = newstr + empty_before + obj.key + '=' + obj.text + '\n';
             }
-        }
-        if(newstr.length > 0){
-            newstr = newstr.slice(0, -1);
         }
         document.getElementById('text_com').value = newstr;
     }
