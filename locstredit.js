@@ -290,6 +290,7 @@ function valueParser(str){
         /__([A-Z0-9]|_(?!_))+__\d+__([A-Za-z0-9\-]|_(?!_))+__/g, //prefixed1
         /__([A-Z0-9]|_(?!_))+__([A-Za-z0-9\-]|_(?!_))+__/g, //prefixed2
         /__\d+__/g, //number
+        /__([A-Z0-9]|_(?!_))+__/g, //fixed
         /\[[a-z\-]+=[^\]]+\]/g, //rich
         /\[\/[a-z]+\]/g, //rich bracket close
         /\\[abfnrtv\\"'\[\]]/g //lua escaping chars
