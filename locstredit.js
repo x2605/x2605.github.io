@@ -87,8 +87,8 @@ function parse(str, obj_oriarr){try{
     str = str.replace(/\u200B/g, '').replace(/\r\n/g, '\n');
     var spl = str.split('\n');
     var reg0 = /^[\u25C0\u25C1]\s?(\d+)\s?[\u25B6\u25B7]\s?(.*)$/;
-    var reg1 = /^\[([a-zA-Z0-9\-_]+)\]\s*$/;
-    var reg2 = /^([a-zA-Z0-9\-_]+)=(.*)$/;
+    var reg1 = /^\[([a-zA-Z0-9\-_#]+)\]\s*$/;
+    var reg2 = /^([a-zA-Z0-9\-_#]+)=(.*)$/;
     var m = null;
     var last_grp = '';
     var ecnt = 0;
@@ -230,13 +230,12 @@ function gencompare(work){try{
                             empty_before = Array(ori[i].grp_ebef).fill('\n').join('');
                             newstr = newstr + empty_before + '[' + last_grp + ']\n';
                         }
+                        empty_before = Array(ori[i].ebef).fill('\n').join('');
                         if(keeploc){
-                            empty_before = Array(ori[i].ebef).fill('\n').join('');
                             newstr = newstr + empty_before + ori[i].key + '=' + loc[j].text + '\n';
                         }
                         else{
-                            empty_before = Array(ori[i].ebef).fill('\n').join('');
-                            newstr = newstr + empty_before + ori[i].key + '=' + ori[j].text + '\n';
+                            newstr = newstr + empty_before + ori[i].key + '=' + ori[i].text + '\n';
                         }
                         
                     }
