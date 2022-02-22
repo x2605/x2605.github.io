@@ -89,8 +89,8 @@ function parse(str, obj_oriarr){try{
     str = str.replace(/\u200B/g, '').replace(/\r\n/g, '\n');
     var spl = str.split('\n');
     var reg0 = /^[\u25C0\u25C1]\s?(\d+)\s?[\u25B6\u25B7]\s?(.*)$/;
-    var reg1 = /^\[([a-zA-Z0-9\-_#]+)\]\s*$/;
-    var reg2 = /^([a-zA-Z0-9\-_#]+)=(.*)$/;
+    var reg1 = /^\[([.a-zA-Z0-9\-_#]+)\]\s*$/;
+    var reg2 = /^([.a-zA-Z0-9\-_#]+)=(.*)$/;
     var m = null;
     var last_grp = '';
     var ecnt = 0;
